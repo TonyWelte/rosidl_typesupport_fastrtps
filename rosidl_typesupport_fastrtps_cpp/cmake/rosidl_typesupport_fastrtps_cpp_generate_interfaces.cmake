@@ -132,6 +132,44 @@ set(_target_suffix "__rosidl_typesupport_fastrtps_cpp")
 add_library(${rosidl_generate_interfaces_TARGET}${_target_suffix}
   ${_generated_files})
 
+target_precompile_headers(${rosidl_generate_interfaces_TARGET}${_target_suffix}
+  PRIVATE
+    # msg__type_support.cpp.em
+    <cstddef>
+    <limits>
+    <stdexcept>
+    <string>
+    [["rosidl_typesupport_cpp/message_type_support.hpp"]]
+    [["rosidl_typesupport_fastrtps_cpp/identifier.hpp"]]
+    [["rosidl_typesupport_fastrtps_cpp/message_type_support.h"]]
+    [["rosidl_typesupport_fastrtps_cpp/message_type_support_decl.hpp"]]
+    [["rosidl_typesupport_fastrtps_cpp/serialization_helpers.hpp"]]
+    [["rosidl_typesupport_fastrtps_cpp/wstring_conversion.hpp"]]
+    [["fastcdr/Cdr.h"]]
+    # msg__rosidl_typesupport_fastrtps_cpp.hpp.em
+    <cstddef>
+    [["rosidl_runtime_c/message_type_support_struct.h"]]
+    [["rosidl_typesupport_interface/macros.h"]]
+    # rosidl_generator_c/ressource/idl__functions.h.em
+    <stdbool.h>
+    <stdlib.h>
+    [["rosidl_runtime_c/action_type_support_struct.h"]]
+    [["rosidl_runtime_c/message_type_support_struct.h"]]
+    [["rosidl_runtime_c/service_type_support_struct.h"]]
+    [["rosidl_runtime_c/type_description/type_description__struct.h"]]
+    [["rosidl_runtime_c/type_description/type_source__struct.h"]]
+    [["rosidl_runtime_c/type_hash.h"]]
+    [["rosidl_runtime_c/visibility_control.h"]]
+    # rosidl_generator_cpp/ressource/idl__struct.hpp.em
+    <algorithm>
+    <array>
+    <memory>
+    <string>
+    <vector>
+    [["rosidl_runtime_cpp/bounded_vector.hpp"]]
+    [["rosidl_runtime_cpp/message_initialization.hpp"]]
+)
+
 # Change output library name if asked to
 if(rosidl_generate_interfaces_LIBRARY_NAME)
   set_target_properties(${rosidl_generate_interfaces_TARGET}${_target_suffix}

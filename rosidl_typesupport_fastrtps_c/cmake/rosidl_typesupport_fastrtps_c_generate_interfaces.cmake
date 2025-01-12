@@ -128,6 +128,38 @@ set_target_properties(${rosidl_generate_interfaces_TARGET}${_target_suffix}
     DEFINE_SYMBOL "ROSIDL_TYPESUPPORT_FASTRTPS_C_BUILDING_DLL_${PROJECT_NAME}"
     CXX_STANDARD 17)
 
+target_precompile_headers(${rosidl_generate_interfaces_TARGET}${_target_suffix}
+  PRIVATE
+    # msg__type_support_c.cpp.em
+    <cassert>
+    <cstddef>
+    <limits>
+    <string>
+    [["rosidl_typesupport_fastrtps_c/identifier.h"]]
+    [["rosidl_typesupport_fastrtps_c/serialization_helpers.hpp"]]
+    [["rosidl_typesupport_fastrtps_c/wstring_conversion.hpp"]]
+    [["rosidl_typesupport_fastrtps_cpp/message_type_support.h"]]
+    [["fastcdr/Cdr.h"]]
+    # srv__type_support_c.cpp.em
+    [["rosidl_typesupport_fastrtps_cpp/service_type_support.h"]]
+    [["rosidl_typesupport_cpp/service_type_support.hpp"]]
+    [["rosidl_typesupport_fastrtps_c/identifier.h"]]
+    # rosidl_generator_c/resource/idl_struct.h.em
+    <stdbool.h>
+    <stddef.h>
+    <stdint.h>
+    # rosidl_generator_c/resource/idl__functions.h.em
+    <stdbool.h>
+    <stdlib.h>
+    [["rosidl_runtime_c/action_type_support_struct.h"]]
+    [["rosidl_runtime_c/message_type_support_struct.h"]]
+    [["rosidl_runtime_c/service_type_support_struct.h"]]
+    [["rosidl_runtime_c/type_description/type_description__struct.h"]]
+    [["rosidl_runtime_c/type_description/type_source__struct.h"]]
+    [["rosidl_runtime_c/type_hash.h"]]
+    [["rosidl_runtime_c/visibility_control.h"]]
+)
+
 target_link_libraries(${rosidl_generate_interfaces_TARGET}${_target_suffix} PUBLIC
   fastcdr
   rosidl_runtime_c::rosidl_runtime_c
